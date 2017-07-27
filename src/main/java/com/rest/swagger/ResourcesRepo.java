@@ -5,13 +5,18 @@
  */
 package com.rest.swagger;
 
-import com.rest.swagger.model.Resources;
+import com.rest.swagger.model.Building;
+import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
  * @author Praneeth Madusanka
  */
-public interface ResourcesRepo extends MongoRepository<Resources, String> {
+public interface ResourcesRepo extends MongoRepository<Building, String> {
+
+    @Query(value = "{ 'name' : ?0 }")
+    List<Building> findByTheBuildingFirstname(String like);
 
 }

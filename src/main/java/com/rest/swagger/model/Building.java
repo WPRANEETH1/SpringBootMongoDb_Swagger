@@ -5,6 +5,7 @@
  */
 package com.rest.swagger.model;
 
+import java.util.List;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
@@ -15,8 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author Praneeth Madusanka
  */
-@Document(collection = "resources")
-public class Resources {
+@Document(collection = "building")
+public class Building {
 
     @Id
     private String id;
@@ -27,11 +28,7 @@ public class Resources {
     private String name;
 
     private String address;
-    private String type;
-
-    public Resources() {
-        super();
-    }
+    private List<Floor> floor;
 
     /**
      * @return the id
@@ -76,23 +73,17 @@ public class Resources {
     }
 
     /**
-     * @return the type
+     * @return the floor
      */
-    public String getType() {
-        return type;
+    public List<Floor> getFloor() {
+        return floor;
     }
 
     /**
-     * @param type the type to set
+     * @param floor the floor to set
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setFloor(List<Floor> floor) {
+        this.floor = floor;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Resources[id=%s, name='%s', address='%s', type='%s']",
-                id, name, address, type);
-    }
 }

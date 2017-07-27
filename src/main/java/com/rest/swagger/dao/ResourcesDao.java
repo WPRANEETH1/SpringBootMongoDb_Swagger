@@ -5,7 +5,7 @@
  */
 package com.rest.swagger.dao;
 
-import com.rest.swagger.model.Resources;
+import com.rest.swagger.model.Building;
 import java.util.List;
 import org.json.simple.JSONArray;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +16,13 @@ import org.springframework.http.ResponseEntity;
  */
 public interface ResourcesDao {
 
-    public Resources createResources(Resources resources);
+    public Building createResources(Building resources);
 
-    public ResponseEntity<Resources> updateResources(String id, Resources resources);
+    public ResponseEntity<Building> updateResources(String id, Building resources);
+//
+//    public void deleteResources(String id);
 
-    public void deleteResources(String id);
+    public Building getResourceById(String name);
 
-    public Resources getResourceById(String name);
-
-    public List<Resources> getAllResources();
+    public List<Building> getAllResources(String like);
 }

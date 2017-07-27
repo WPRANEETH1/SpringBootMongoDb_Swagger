@@ -7,7 +7,7 @@ package com.rest.swagger.dao.impl;
 
 import com.rest.swagger.ResourcesRepo;
 import com.rest.swagger.dao.ResourcesDao;
-import com.rest.swagger.model.Resources;
+import com.rest.swagger.model.Building;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -26,36 +26,36 @@ public class ResourcesDaoImpl implements ResourcesDao {
     private ResourcesRepo resourcesRepo;
 
     @Override
-    public Resources createResources(Resources resources) {
+    public Building createResources(Building resources) {
         return resourcesRepo.save(resources);
     }
 
     @Override
-    public ResponseEntity<Resources> updateResources(String id, Resources resources) {
-        Resources findResources = resourcesRepo.findOne(id);
+    public ResponseEntity<Building> updateResources(String id, Building resources) {
+        Building findResources = resourcesRepo.findOne(id);
         if (findResources == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        findResources.setName(resources.getName());
         findResources.setAddress(resources.getAddress());
-        findResources.setType(resources.getType());
-        Resources updateResources = resourcesRepo.save(findResources);
+        findResources.setFloor(resources.getFloor());
+        Building updateResources = resourcesRepo.save(findResources);
         return new ResponseEntity<>(updateResources, HttpStatus.OK);
     }
+//    @Override
+//    public void deleteResources(String id) {
+//        resourcesRepo.delete(id);
+//    }
 
     @Override
-    public void deleteResources(String id) {
-        resourcesRepo.delete(id);
-    }
-
-    @Override
-    public Resources getResourceById(String id) {
+    public Building getResourceById(String id) {
         return resourcesRepo.findOne(id);
     }
 
     @Override
-    public List<Resources> getAllResources() {
-        Sort sortByname = new Sort(Sort.Direction.DESC, "name");
-        return resourcesRepo.findAll(sortByname);
+    public List<Building> getAllResources(String like) {
+//        Sort sortByname = new Sort(Sort.Direction.DESC, "name");
+        return resourcesRepo.findByTheBuildingFirstname(like);
     }
 
 }
